@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Your One-Stop Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 1rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .hero {
+            background-image: url('/placeholder.svg?height=400&width=1200');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .hero-content {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        .featured-products, .categories, .all-products {
+            padding: 2rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+        }
+        .category-list {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .category-button {
+            padding: 0.5rem 1rem;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .category-button.active {
+            background-color: #333;
+            color: white;
+        }
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">ShopEase</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to ShopEase</h1>
+                <p>Discover amazing products at unbeatable prices!</p>
+                <button id="shop-now">Shop Now</button>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <h2>Featured Products</h2>
+            <div class="product-grid" id="featured-product-grid">
+                <!-- Featured product cards will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <section class="categories" id="categories">
+            <h2>Categories</h2>
+            <div class="category-list" id="category-list">
+                <!-- Category buttons will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <section class="all-products" id="products">
+            <h2>All Products</h2>
+            <div class="filters">
+                <input type="text" id="search" placeholder="Search products...">
+                <select id="sort">
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="price-asc">Price (Low to High)</option>
+                    <option value="price-desc">Price (High to Low)</option>
+                </select>
+            </div>
+            <div class="product-grid" id="all-product-grid">
+                <!-- All product cards will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 ShopEase. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Sample product data
+        const products = [
+            { id: 1, name: 'Smartphone', price: 499.99, image: '/placeholder.svg?height=200&width=200', category: 'Electronics' },
+            { id: 2, name: 'Laptop', price: 899.99, image: '/placeholder.svg?height=200&width=200', category: 'Electronics' },
+            { id: 3, name: 'Headphones', price: 99.99, image: '/placeholder.svg?height=200&width=200', category: 'Electronics' },
+            { id: 4, name: 'Smartwatch', price: 199.99, image: '/placeholder.svg?height=200&width=200', category: 'Electronics' },
+            { id: 5, name: 'Running Shoes', price: 79.99, image: '/placeholder.svg?height=200&width=200', category: 'Sports' },
+            { id: 6, name: 'Yoga Mat', price: 29.99, image: '/placeholder.svg?height=200&width=200', category: 'Sports' },
+            { id: 7, name: 'Coffee Maker', price: 59.99, image: '/placeholder.svg?height=200&width=200', category: 'Home' },
+            { id: 8, name: 'Blender', price: 39.99, image: '/placeholder.svg?height=200&width=200', category: 'Home' }
+        ];
+
+        // Function to create product cards
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>$${product.price}</p>
+                <p>Category: ${product.category}</p>
+                <button class="add-to-cart">Add to Cart</button>
+            `;
+            return card;
+        }
+
+        // Function to populate product grid
+        function populateProductGrid(products, gridId) {
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = '';
+            products.forEach(product => {
+                grid.appendChild(createProductCard(product));
+            });
+        }
+
+        // Populate featured products (first 4 products)
+        populateProductGrid(products.slice(0, 4), 'featured-product-grid');
+
+        // Populate all products
+        populateProductGrid(products, 'all-product-grid');
+
+        // Generate category buttons
+        const categories = [...new Set(products.map(product => product.category))];
+        const categoryList = document.getElementById('category-list');
+        categories.forEach(category => {
+            const button = document.createElement('button');
+            button.className = 'category-button';
+            button.textContent = category;
+            button.addEventListener('click', () => filterByCategory(category));
+            categoryList.appendChild(button);
+        });
+
+        // Filter products by category
+        function filterByCategory(category) {
+            const filteredProducts = category === 'All' 
+                ? products 
+                : products.filter(product => product.category === category);
+            populateProductGrid(filteredProducts, 'all-product-grid');
+            
+            // Update active category button
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.classList.toggle('active', button.textContent === category);
+            });
+        }
+
+        // Add "All" category button
+        const allButton = document.createElement('button');
+        allButton.className = 'category-button active';
+        allButton.textContent = 'All';
+        allButton.addEventListener('click', () => filterByCategory('All'));
+        categoryList.prepend(allButton);
+
+        // Search functionality
+        const searchInput = document.getElementById('search');
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+            populateProductGrid(filteredProducts, 'all-product-grid');
+        });
+
+        // Sort functionality
+        const sortSelect = document.getElementById('sort');
+        sortSelect.addEventListener('change', () => {
+            const sortValue = sortSelect.value;
+            const sortedProducts = [...products].sort((a, b) => {
+                switch (sortValue) {
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'price-asc':
+                        return a.price - b.price;
+                    case 'price-desc':
+                        return b.price - a.price;
+                    default:
+                        return 0;
+                }
+            });
+            populateProductGrid(sortedProducts, 'all-product-grid');
+        });
+
+        // Add event listener to "Shop Now" button
+        document.getElementById('shop-now').addEventListener('click', () => {
+            alert('Welcome to our shop! Start browsing our amazing products.');
+        });
+
+        // Add event listeners to "Add to Cart" buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart')) {
+                const productName = e.target.parentElement.querySelector('h3').textContent;
+                alert(`${productName} added to cart!`);
+            }
+        });
+    </script>
+</body>
+</html>
