@@ -47,7 +47,7 @@ const productSeeds: Partial<IProduct>[] = [
 
 // Function to seed data
 
-const DB_HOST='mongodb://localhost:27017/ShopRw'
+const DB_HOST='mongodb://localhost:27017/ShopRW'
 
 const seedProducts = async () => {
   try {

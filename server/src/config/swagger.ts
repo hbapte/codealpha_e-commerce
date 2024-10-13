@@ -5,7 +5,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'ShopRw - E-commerce API Documentation',
+      title: 'ShopRW - E-commerce API Documentation',
       version: '1.0.0',
       description: 'An API for an e-commerce application',
     },

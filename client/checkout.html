@@ -3,148 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1a202c;
-            color: #e2e8f0;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-                gap: 2rem;
-            }
-        }
-        .cart, .checkout {
-            flex: 1;
-        }
-        h2 {
-            color: #ed8936;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .cart-table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #2d3748;
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        .cart-table th, .cart-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #4a5568;
-        }
-        .cart-table th {
-            background-color: #2d3748;
-            color: #a0aec0;
-            font-weight: normal;
-        }
-        .product-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .product-info img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 0.25rem;
-        }
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .quantity-btn {
-            background-color: #4a5568;
-            border: none;
-            color: #e2e8f0;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .remove-btn {
-            background: none;
-            border: none;
-            color: #f56565;
-            cursor: pointer;
-        }
-        .total {
-            text-align: right;
-            padding: 1rem;
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-        .total-amount {
-            color: #ed8936;
-            font-size: 1.5rem;
-        }
-        form {
-            display: grid;
-            gap:1rem;
-            grid-template-columns: repeat(2, 1fr);
-            /* width: 100%; */
-        }
-
-        .input-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        input, textarea {
-            /* width: 100%; */
-            padding: 0.5rem;
-            background-color: #2d3748;
-            border: 1px solid #4a5568;
-            color: #e2e8f0;
-            border-radius: 0.25rem;
-        }
-        textarea {
-            grid-column: span 2;
-            resize: vertical;
-        }
-        .required::after {
-            content: "*";
-            color: #f56565;
-        }
-        button[type="submit"] {
-            grid-column: span 2;
-            padding: 0.75rem;
-            background-color: #ed8936;
-            color: white;
-            border: none;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        button[type="submit"]:hover {
-            background-color: #dd6b20;
-        }
-    </style>
+    <title>ShopRW | Checkout</title>  
+    <link rel="stylesheet" href="./css/checkout.css">
 </head>
 <body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="logo">ShopRW</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                ☰
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="cart-icon" id="cartIcon">                
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+                </svg>             
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </nav>
+    </header>
+
+
+
     <div class="container">
         <div class="cart">
             <h2>Your Cart</h2>
@@ -198,91 +84,70 @@
                     <label for="street" class="required">Street address</label>
                     <input type="text" id="street" required placeholder="Enter Street Address">
                 </div>
-                <div>
+                <div class="input-field">
                     <label for="house">House Number (optional)</label>
                     <input type="text" id="house" placeholder="Enter house number">
                 </div>
-                <div>
+                <div class="input-field">
                     <label for="additional">Additional Information (optional)</label>
-                    <textarea id="additional" rows="3" placeholder="Additional information or request"></textarea>
+                    <textarea id="additional" rows="4" placeholder="Additional information or request"></textarea>
                 </div>
                 <button type="submit">Complete Order</button>
             </form>
         </div>
     </div>
 
-    <script>
-      
-   // Retrieve cart from local storage
-let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-function updateCart() {
-    const cartItemsElement = document.getElementById('cart-items');
-    cartItemsElement.innerHTML = '';
-
-    cartItems.forEach(item => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>
-                <div class="product-info">
-                    <img src="${item.image}" alt="${item.name}">
-                    ${item.name}
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale</a></li>
+                    <li><a href="#">All Products</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
                 </div>
-            </td>
-            <td>${item.price} RWF</td>
-            <td>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                </div>
-            </td>
-            <td>${item.price * item.quantity} RWF</td>
-            <td>
-                <button class="remove-btn" onclick="removeItem(${item.id})">🗑️</button>
-            </td>
-        `;
-        cartItemsElement.appendChild(row);
-    });
+                <h3 style="margin-top: 20px;">Newsletter</h3>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Your E-commerce Store. All rights reserved.</p>
+        </div>
+    </footer>
 
-    updateTotal();
-}
-
-function updateQuantity(id, change) {
-    const item = cartItems.find(item => item.id === id);
-    if (item) {
-        item.quantity = Math.max(1, item.quantity + change); // Prevent quantity from going below 1
-        localStorage.setItem('cart', JSON.stringify(cartItems)); // Update localStorage
-        updateCart();
-    }
-}
-
-function removeItem(id) {
-    cartItems = cartItems.filter(item => item.id !== id);
-    localStorage.setItem('cart', JSON.stringify(cartItems)); // Update localStorage
-    updateCart();
-}
-
-function updateTotal() {
-    const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    document.getElementById('cart-total').textContent = `${total} RWF`;
-}
-
-// Initialize the cart on page load
-updateCart();
-
-
-
-        document.getElementById('checkout-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const orderData = Object.fromEntries(formData.entries());
-            console.log('Order submitted:', orderData);
-            alert('Thank you for your order! It has been submitted successfully.');
-        });
-
-        // Initialize the cart
-        updateCart();
-    </script>
+    <script src="./js/checkout.js"></script>
 </body>
 </html>

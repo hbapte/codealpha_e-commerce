@@ -3,101 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopEase - Your One-Stop Shop</title>
-    <link rel="stylesheet" href="/css/style1.css">
-    
+    <title>E-commerce Header Navbar</title>
+     <link rel="stylesheet" href="./css/style.css"> 
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">ShopEase</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="logo">ShopRW</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                ☰
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
+            <div class="cart-icon" id="cartIcon">                
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+                </svg>             
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Welcome to ShopEase</h1>
-                <p>Discover amazing products at unbeatable prices!</p>
-                <button id="shop-now">Shop Now</button>
-            </div>
-        </section>
 
-        <section class="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product-grid" id="featured-product-grid">
-                <!-- Featured product cards will be dynamically inserted here -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Discover Our Latest Collection</h1>
+                <p class="hero-description">Elevate your style with our premium, handcrafted products. Shop now and experience the difference.</p>
+                <a href="#" class="cta-button">Shop Now</a>
             </div>
-        </section>
-
-        <div class="promo-banner">
-            <div class="promo-content">
-                <h1 class="promo-title">Grab Upto 50% Off On Selected Headphone</h1>
-                <a href="#" class="buy-button">Buy Now</a>
-            </div>
-            <div class="promo-image">
-                <img src="/assets/headphones.webp?height=300&width=300" alt="Woman wearing purple headphones">
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1620797959912-08d56933f2fd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Featured Product" id="heroImage">
             </div>
         </div>
+    </section>
 
-        <section class="all-products" id="products">
-            <h2>All Products</h2>
-            <div class="filters">
-                <input type="text" id="search" placeholder="Search products...">
+        <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid" id="productsGrid">
+            </div>
+        </div>
+    </section>
 
-                <div class="categoryfilter">
+    <!-- Banner -->
+    <div class="promo-banner">
+        <div class="promo-content">
+            <h1 class="promo-title">Grab Up to 50% Off On Selected Headphone</h1>
+            <button class="buy-now-btn">Buy Now</button>
+        </div>
+        <div class="promo-image">
+            <img src="https://plus.unsplash.com/premium_photo-1683133315137-cc03b57dc387?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="banner" width="500" height="100">
+        </div>
+    </div>
 
-                <div class="category-list" id="category-list">
-                    <!-- Category buttons will be dynamically inserted here -->
+        <!-- All Products -->
+        <section class="all-products">
+            <div class="container">
+                <h2 class="section-title">Choose Product</h2>
+                <div class="product-controls">
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search products...">
+                    </div>
+                    <div>
+                    <select id="categoryFilter" class="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="books">Books</option>
+                        <option value="home">Home & Garden</option>
+                    </select>
+                    <select id="sortBy" class="sort-by">
+                        <option value="name">Sort by Name</option>
+                        <option value="price-low-high">Price: Low to High</option>
+                        <option value="price-high-low">Price: High to Low</option>
+                    </select>
                 </div>
-                <select id="sort">
-                    <option value="name-asc">Name (A-Z)</option>
-                    <option value="name-desc">Name (Z-A)</option>
-                    <option value="price-asc">Price (Low to High)</option>
-                    <option value="price-desc">Price (High to Low)</option>
-                </select>
-            </div>
-            </div>
-            <div class="product-grid" id="all-product-grid">
-                <!-- All product cards will be dynamically inserted here -->
+                </div>
+                <div class="product-gri" id="allProducts">
+                    <!-- Product cards will be dynamically inserted here -->
+                </div>
+                <div class="show-more-container">
+                    <button id="showMoreBtn" class="show-more-btn">Show More</button>
+                </div>
             </div>
         </section>
+         
 
-        <section class="contact-section">
-            <h2>Contact Us</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <h3>Address</h3>
-                        <p>123 Main Street<br>Anytown, ST 12345<br>United States</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>Phone</h3>
-                        <p>(123) 456-7890</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>Email</h3>
-                        <p>info@example.com</p>
-                    </div>
-                 
-                </div>
-                <div id="map" class="map-container"></div>
-            </div>
-        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2023 ShopEase. All rights reserved.</p>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale</a></li>
+                    <li><a href="#">All Products</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <h3 style="margin-top: 20px;">Newsletter</h3>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Your E-commerce Store. All rights reserved.</p>
+        </div>
     </footer>
 
-  <script src="/js/main.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
+
+  <script src="./js/script.js"></script>
 </body>
 </html>
