@@ -45,15 +45,15 @@ export const getAllProducts = async (req: Request, res: Response) => {
   // PUT update a product by ID
   export const updateProduct = async (req: Request, res: Response) => {
     try {
-      const { name, category, featured, price, description, images } = req.body;
-      const updatedFields: { name?: string; category?:string, featured?: boolean, price?:number, description?: string, images?: string[] } = {};
+      const { name, category, featured, price, description, image } = req.body;
+      const updatedFields: { name?: string; category?:string, featured?: boolean, price?:number, description?: string, image?: string } = {};
   
       if (name) updatedFields.name = name;
       if (category) updatedFields.category = category;
       if (featured) updatedFields.featured = featured;
       if (price) updatedFields.price = price;
       if (description) updatedFields.description = description;
-      if (images) updatedFields.images = images;     
+      if (image) updatedFields.image = image;     
 
   
       const updatedProduct = await Product.findByIdAndUpdate(

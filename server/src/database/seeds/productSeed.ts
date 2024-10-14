@@ -1,63 +1,41 @@
+// server/src/database/seeds/productSeed.ts
 import mongoose from 'mongoose';
 import Product, { IProduct } from '../models/product';
+import { faker } from '@faker-js/faker';
+import dotenv from 'dotenv';
 
-// Example seed data with all required fields
-const productSeeds: Partial<IProduct>[] = [
-  {
-    name: 'Smartphone',
-    price: 599.99,
-    images: ['smartphone1.jpg', 'smartphone2.jpg'],
-    category: 'electronics',
-    description: 'Latest smartphone with cutting-edge features.',
-    featured: true,
-  },
-  {
-    name: 'Laptop',
-    price: 999.99,
-    images: ['laptop1.jpg', 'laptop2.jpg'],
-    category: 'electronics',
-    description: 'Powerful laptop for professionals and gamers.',
-    featured: false,
-  },
-  {
-    name: 'T-shirt',
-    price: 19.99,
-    images: ['tshirt1.jpg', 'tshirt2.jpg'],
-    category: 'clothes',
-    description: 'Comfortable cotton t-shirt in various sizes.',
-    featured: true,
-  },
-  {
-    name: 'Jeans',
-    price: 49.99,
-    images: ['jeans1.jpg', 'jeans2.jpg'],
-    category: 'clothes',
-    description: 'Stylish denim jeans available in multiple fits.',
-    featured: false,
-  },
-  {
-    name: 'Blender',
-    price: 89.99,
-    images: ['blender1.jpg', 'blender2.jpg'],
-    category: 'home appliances',
-    description: 'High-performance blender for smoothies and more.',
-    featured: true,
-  },
-];
+dotenv.config(); 
 
-// Function to seed data
+const DB_HOST = process.env.DB_URI as string;
 
-const DB_HOST='mongodb://localhost:27017/ShopRW'
+const generateProduct = (): Partial<IProduct> => ({
+  name: `${faker.commerce.productAdjective()} ${faker.commerce.product()}`, // Combining adjective with product name
+  description: faker.commerce.productDescription(), // Using faker to generate a relevant description
+  price: parseFloat(faker.commerce.price({ min: 1000, max: 150000, dec: 0 })), // Random price in the specified range
+  category: faker.helpers.arrayElement(['electronics', 'books', 'home', 'clothing']), // Randomly selecting a category
+  featured: faker.datatype.boolean(), // Random boolean for featured status
+  image: `https://source.unsplash.com/640x480/?${faker.commerce.productMaterial()},${faker.commerce.productAdjective()}`, // Using Unsplash for random images related to product material
+});
 
+const generateProducts = (count: number): Partial<IProduct>[] => {
+  const products: Partial<IProduct>[] = [];
+  for (let i = 0; i < count; i++) {
+    products.push(generateProduct());
+  }
+  return products;
+};
+
+// Seed function to populate the database
 const seedProducts = async () => {
   try {
     await mongoose.connect(DB_HOST);
-    
+
     // Clear existing products
     await Product.deleteMany({});
     console.log('Existing products removed');
 
-    // Insert seed products
+
+    const productSeeds = generateProducts(42); // number of seed products  to gen
     await Product.insertMany(productSeeds);
     console.log('Product seeds inserted successfully');
 
@@ -68,5 +46,4 @@ const seedProducts = async () => {
   }
 };
 
-// Run the seed function
 seedProducts();

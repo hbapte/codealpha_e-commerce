@@ -30,7 +30,6 @@
     </header>
 
 
-
     <div class="container">
         <div class="cart">
             <h2>Your Cart</h2>
@@ -45,7 +44,6 @@
                     </tr>
                 </thead>
                 <tbody id="cart-items">
-                    <!-- Cart items will be dynamically inserted here -->
                 </tbody>
             </table>
             <div class="total">
@@ -58,42 +56,43 @@
             <form id="checkout-form">
                 <div class="input-field">
                     <label for="name" class="required">Name</label>
-                    <input type="text" id="name" required placeholder="Enter Name">
+                    <input type="text" id="name" name="name" required placeholder="Enter Name">
                 </div>
                 <div class="input-field">
                     <label for="email" class="required">Email</label>
-                    <input type="email" id="email" required placeholder="Enter Email">
+                    <input type="email" id="email" name="email" required placeholder="Enter Email">
                 </div>
                 <div class="input-field">
                     <label for="phone" class="required">Phone</label>
-                    <input type="tel" id="phone" required placeholder="Enter phone number">
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter phone number">
                 </div>
                 <div class="input-field">
                     <label for="district" class="required">District</label>
-                    <input type="text" id="district" required placeholder="Enter District">
+                    <input type="text" id="district" name="district" required placeholder="Enter District">
                 </div>
                 <div class="input-field">
                     <label for="sector" class="required">Sector</label>
-                    <input type="text" id="sector" required placeholder="Enter Sector">
+                    <input type="text" id="sector" name="sector" required placeholder="Enter Sector">
                 </div>
                 <div class="input-field">
                     <label for="city" class="required">City</label>
-                    <input type="text" id="city" required placeholder="Enter City">
+                    <input type="text" id="city" name="city" required placeholder="Enter City">
                 </div>
                 <div class="input-field">
                     <label for="street" class="required">Street address</label>
-                    <input type="text" id="street" required placeholder="Enter Street Address">
+                    <input type="text" id="street" name="street" required placeholder="Enter Street Address">
                 </div>
                 <div class="input-field">
                     <label for="house">House Number (optional)</label>
-                    <input type="text" id="house" placeholder="Enter house number">
+                    <input type="text" id="house" name="house" placeholder="Enter house number">
                 </div>
                 <div class="input-field">
                     <label for="additional">Additional Information (optional)</label>
-                    <textarea id="additional" rows="4" placeholder="Additional information or request"></textarea>
+                    <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Additional information or request"></textarea>
                 </div>
                 <button type="submit">Complete Order</button>
             </form>
+            
         </div>
     </div>
 
@@ -147,6 +146,10 @@
             <p>&copy; 2023 Your E-commerce Store. All rights reserved.</p>
         </div>
     </footer>
+
+
+      <!-- Toast Notification -->
+<div id="toast" class="toast"></div>
 
     <script src="./js/checkout.js"></script>
 </body>

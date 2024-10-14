@@ -17,7 +17,7 @@ export const productSchema = z.object({
     .positive({ message: 'Price must be a positive number' }),
 
 
-  images: z.array(z.string().url()),  
+  images: z.string().url(),  
     
 
   description: z

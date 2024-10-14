@@ -14,8 +14,8 @@ const getAllOrders = async (req: Request, res: Response) => {
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { orderName } = req.body;
-    const newOrder = new order({ name: orderName });
+    const { total, buyerInfo, products } = req.body;
+    const newOrder = new order({ total, buyerInfo, products });
     await newOrder.save();
     res.status(201).json(newOrder);
   } catch (error) {
