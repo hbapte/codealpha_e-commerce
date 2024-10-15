@@ -61,7 +61,7 @@ function updateCart() {
 function updateQuantity(id, change) {
     const item = cartItems.find(item => item.id === id);
     if (item) {
-        item.quantity = Math.max(1, item.quantity + change); // Ensure quantity does not go below 1
+        item.quantity = Math.max(1, item.quantity + change); 
         localStorage.setItem('cart', JSON.stringify(cartItems));
         updateCart();
     }

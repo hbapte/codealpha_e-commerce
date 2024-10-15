@@ -1,4 +1,4 @@
-// client\js\script.js
+
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const navLinks = document.getElementById('navLinks');
 const cartIcon = document.getElementById('cartIcon');
@@ -14,9 +14,6 @@ function updateCartCount() {
 }
 
 
-
-
-// Function to show a toast notification with type
 function showToast(message, type = 'default') {
     const toast = document.getElementById('toast');
     toast.textContent = message;
@@ -61,22 +58,21 @@ cartIcon.addEventListener('click', () => {
     }
 });
 
-// Function to fetch products from API
+
 async function fetchProducts() {
     try {
         const response = await fetch('http://localhost:3000/api/products');
         if (!response.ok) throw new Error('Network response was not ok');
-        products = await response.json();  // Update the products array with fetched data
+        products = await response.json();  
         renderFeaturedProducts();           
-        filterAndSortProducts();            // Reapply filters and sorting if needed
+        filterAndSortProducts();      
     } catch (error) {
         console.error('Error fetching products:', error);
     }
 }
 
-// Initialize the cart count on page load
 document.addEventListener('DOMContentLoaded', function() {
-    fetchProducts();  // Fetch products on load
+    fetchProducts();  
     updateCartCount();       
     const cards = document.querySelectorAll('.product-card');
     cards.forEach((card, index) => {
@@ -86,8 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, index * 100);
     });
 });
-
-
 
 
 
@@ -102,7 +96,6 @@ mobileMenuBtn.addEventListener('click', () => {
 });
 
 
-// Close mobile menu when a link is clicked
 navLinks.addEventListener('click', (e) => {
     if (e.target.tagName === 'A') {
         navLinks.classList.remove('active');
@@ -125,7 +118,6 @@ function createProductCard(product) {
     `;
 }
 
-// Function to render featured products
 function renderFeaturedProducts() {
     const productsGrid = document.getElementById('productsGrid');
     const featuredProducts = products.filter(product => product.featured).slice(0, 3);
@@ -145,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Add a simple animation effect when the page loads
 document.addEventListener('DOMContentLoaded', function() {
     renderAllProducts();
     const cards = document.querySelectorAll('.product-card');
@@ -230,8 +221,6 @@ document.getElementById('showMoreBtn').addEventListener('click', () => {
 filterAndSortProducts();
 
 
-
-// Function to add a product to the cart
 function addToCart(product) {
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
     const existingProductIndex = cartItems.findIndex(item => item.id === product._id);
